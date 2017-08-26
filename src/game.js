@@ -1,5 +1,6 @@
 import React from "react"
-import Card from "./card";
+import Card from "./card"
+import shuffle from "./shuffle"
 
 const photos = [
   "/images/dog-1.jpg",
@@ -12,16 +13,27 @@ const photos = [
 
 class Game extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      cards: this.duplicatedAndShuffledCards(),
+      flippedCards: []
+    }
+  }
+
+  duplicatedAndShuffledCards = () => (
+    shuffle(photos)
+  )
+
   render() {
     return (
-      <div>
-        {photos.map(photo => (
-          <Card image={photo}/>
+      <div className="game-body">
+        {this.state.cards.map(card => (
+          <Card image={card}/>
         ))}
       </div>
     )
   }
-
 
 }
 
