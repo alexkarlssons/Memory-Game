@@ -25,9 +25,25 @@ body {
   margin: auto;
   overflow: auto;
   width: 900px;
+  height: 500px;
+  border: 5px solid #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FF8C00;
 }
 
 .side-panel {
-  width: 200px;
+  float: right;
+  width: 230px;
   height: 100%;
+  background-color: white;
+  border-left: 5px solid #000;
+  background-color: #FF1493;
+}
+
+.card-container {
+  display: inline-block;
+  width: 650px;
 }
