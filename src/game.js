@@ -17,8 +17,7 @@ class Game extends React.Component {
     super(props)
     this.state = {
       cards: this.duplicatedAndShuffledCards(),
-      flippedCards: [],
-      counter: 0
+      flippedCards: []
     }
   }
 
@@ -26,8 +25,17 @@ class Game extends React.Component {
     shuffle([...photos, ...photos])
   )
 
-  handleCardFlip = photo => {
-    console.log(photo)
+  handleCardFlip = (photo, unFlipCallBack) => {
+    const flippedCards = [...this.state.flippedCards, { photo, unFlipCallBack }]
+    this.setState({ flippedCards }, this.handleFlippedCardChange)
+  }
+
+  handleFlippedCardChange = () => {
+    if(this.state.flippedCards.length === 2){
+        this.state.flippedCards.forEach(card => {
+          card.unFlipCallBack()
+        })
+    }
   }
 
   render() {
@@ -35,7 +43,10 @@ class Game extends React.Component {
       <div className="game-body">
         <div className="card-container">
         {this.state.cards.map(card => (
-          <Card onFlip={this.handleCardFlip} key={this.state.counter++} image={card}/>
+          <Card
+          canFlip={this.state.flippedCards && this.state.flippedCards.length < 2}
+          onFlip={this.handleCardFlip}
+          image={card}/>
         ))}
         </div>
 
