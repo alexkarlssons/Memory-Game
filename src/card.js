@@ -11,6 +11,7 @@ class Card extends React.Component {
 
   flipCard = () => {
     this.setState({ flipped: !this.state.flipped })
+    this.props.onFlip(this.props.image)
   }
 
   render() {

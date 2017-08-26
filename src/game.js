@@ -26,12 +26,16 @@ class Game extends React.Component {
     shuffle([...photos, ...photos])
   )
 
+  handleCardFlip = photo => {
+    console.log(photo)
+  }
+
   render() {
     return (
       <div className="game-body">
         <div className="card-container">
         {this.state.cards.map(card => (
-          <Card key={this.state.counter++} image={card}/>
+          <Card onFlip={this.handleCardFlip} key={this.state.counter++} image={card}/>
         ))}
         </div>
 
