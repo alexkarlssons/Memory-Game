@@ -17,20 +17,26 @@ class Game extends React.Component {
     super(props)
     this.state = {
       cards: this.duplicatedAndShuffledCards(),
-      flippedCards: []
+      flippedCards: [],
+      counter: 0
     }
   }
 
   duplicatedAndShuffledCards = () => (
-    shuffle(photos)
+    shuffle([...photos, ...photos])
   )
 
   render() {
     return (
       <div className="game-body">
+        <div className="card-container">
         {this.state.cards.map(card => (
-          <Card image={card}/>
+          <Card key={this.state.counter++} image={card}/>
         ))}
+        </div>
+
+        <div className="side-panel">
+        </div>
       </div>
     )
   }
