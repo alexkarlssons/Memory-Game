@@ -8,8 +8,11 @@ class GameOver extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>Congratulations</p>
+      <div className="game-over-div">
+        <h1 className="game-over-text">Congratulations</h1>
+        <div className="game-over-image-div">
+          <img className="game-over-image" src="https://i.giphy.com/media/VpysUTI25mTlK/giphy.webp" alt=""/>
+        </div>
       </div>
     )
   }

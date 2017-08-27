@@ -23,7 +23,7 @@ class Card extends React.Component {
   render() {
     return (
       <div onClick={this.flipCard} className="card-box">
-        <img className="card-image" src={this.state.flipped?this.props.image:"/images/awesome.jpg"} alt=""/>
+        <img className="card-image" src={this.state.flipped?this.props.image:"https://i.pinimg.com/736x/4c/68/45/4c6845829aec8d3f8f35899cccc8b1d6--joker-playing-card-joker-card.jpg"} alt=""/>
       </div>
     )
   }

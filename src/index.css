@@ -9,14 +9,11 @@ body {
   float: left;
   overflow: auto;
   margin: 30px 0 0 30px;
-  border: 1px solid #000;
-  padding: 10px;
-  background-color: green;
 }
 
 .card-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border: 1px solid #000;
 }
 
@@ -46,4 +43,36 @@ body {
 .card-container {
   display: inline-block;
   width: 650px;
+}
+
+.game-over-div {
+}
+
+.game-over-image {
+}
+
+.game-over-image-div {
+  text-align: center;
+}
+
+.game-over-text {
+  color: black;
+  text-align: center;
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes example {
+    0%   {color:#00FFFF;}
+    10%  {color:#DC143C;}
+    20%  {color:#7FFF00;}
+    30%  {color:#9932CC;}
+    40%  {color:#20B2AA;}
+    50%  {color:#6B8E23;}
+    60%  {color:#FA8072;}
+    70%  {color:#9ACD32;}
+    80%  {color:#40E0D0;}
+    90%  {color:#DDA0DD;}
+    100% {color:#000080;}
 }
