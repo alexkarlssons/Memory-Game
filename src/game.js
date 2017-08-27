@@ -32,9 +32,12 @@ class Game extends React.Component {
 
   handleFlippedCardChange = () => {
     if(this.state.flippedCards.length === 2){
+      setTimeout(() => {
         this.state.flippedCards.forEach(card => {
           card.unFlipCallBack()
         })
+      }, 1000)
+
     }
   }
 
