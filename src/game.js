@@ -11,7 +11,6 @@ class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [],
       flippedCards: [],
       gameIsOver: false,
       clicks: 0
