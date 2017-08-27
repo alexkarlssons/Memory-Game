@@ -1,6 +1,8 @@
 import React from "react"
 import Card from "./card"
 import shuffle from "./shuffle"
+import ResetButton from "./resetbutton"
+import GameOver from "./gameover"
 
 const photos = [
   "/images/dog-1.jpg",
@@ -17,7 +19,8 @@ class Game extends React.Component {
     super(props)
     this.state = {
       cards: this.duplicatedAndShuffledCards(),
-      flippedCards: []
+      flippedCards: [],
+      gameIsOver: false
     }
   }
 
@@ -25,40 +28,66 @@ class Game extends React.Component {
     shuffle([...photos, ...photos])
   )
 
-  handleCardFlip = (photo, unFlipCallBack) => {
-    const flippedCards = [...this.state.flippedCards, { photo, unFlipCallBack }]
+  handleCardFlip = (photo, id, unFlipCallBack) => {
+    const flippedCards = [...this.state.flippedCards, { photo, unFlipCallBack, id }]
     this.setState({ flippedCards }, this.handleFlippedCardChange)
   }
 
   handleFlippedCardChange = () => {
-    if(this.state.flippedCards.length === 2){
-      if(this.state.flippedCards[0].photo === this.state.flippedCards[1].photo){
-        this.setState({flippedCards: []})
-      }else{
-        setTimeout(() => {
-          this.state.flippedCards.forEach(card => {
-            card.unFlipCallBack()
-          })
-          this.setState({flippedCards: []})
-        }, 1000)
-      }
+    if (this.state.flippedCards.length === 2) {
+      setTimeout(() => {
+        if (this.state.flippedCards[0].photo === this.state.flippedCards[1].photo) {
+          this.handleFlippedMatch()
+        } else {
+          this.handleFlippedMisMatch()
+        }
+      }, 500)
     }
   }
+
+  handleFlippedMatch = () => {
+    const cards = this.state.cards.filter(card => card.item !== this.state.flippedCards[0].photo)
+    if(cards.length === 0){
+      this.setState({ gameIsOver: true })
+    }
+    this.setState({ cards, flippedCards: [] })
+  }
+
+  handleFlippedMisMatch = () => {
+    this.state.flippedCards.forEach(card => {
+      card.unFlipCallBack()
+    })
+    this.setState({ flippedCards: [] })
+  }
+
+  resetGame = () => {
+    this.setState({cards: this.duplicatedAndShuffledCards(), flippedCards: [], gameIsOver: false})
+  }
+
+  renderCards = () => (
+    this.state.cards.map(card => (
+      <Card
+      canFlip={this.state.flippedCards.length < 2}
+      onFlip={this.handleCardFlip}
+      image={card.item}
+      id={card.id}
+      key={card.id}/>
+    ))
+  )
+
+  renderGameOver = () => (
+    <GameOver />
+  )
 
   render() {
     return (
       <div className="game-body">
         <div className="card-container">
-        {this.state.cards.map(card => (
-          <Card
-          canFlip={this.state.flippedCards.length < 2}
-          onFlip={this.handleCardFlip}
-          image={card.item}
-          key={card.idCounter}/>
-        ))}
+          {this.state.gameIsOver? this.renderGameOver():this.renderCards()}
         </div>
 
         <div className="side-panel">
+          <ResetButton onReset={this.resetGame}/>
         </div>
       </div>
     )

@@ -18,7 +18,7 @@ export default array => {
     let returnArray = []
     let idCounter = 0
     array.forEach(item => {
-      returnArray[idCounter] = {item, idCounter}
+      returnArray[idCounter] = {item, id: idCounter}
       idCounter += 1
     });
     console.log(returnArray)

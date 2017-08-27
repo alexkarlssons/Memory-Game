@@ -12,7 +12,7 @@ class Card extends React.Component {
   flipCard = () => {
     if(this.props.canFlip){
       this.setState({ flipped: true })
-      this.props.onFlip(this.props.image, this.handleCardFlipRequest)
+      this.props.onFlip(this.props.image, this.props.id, this.handleCardFlipRequest)
     }
   }
 
