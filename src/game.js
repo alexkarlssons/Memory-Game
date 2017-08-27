@@ -36,6 +36,7 @@ class Game extends React.Component {
         this.state.flippedCards.forEach(card => {
           card.unFlipCallBack()
         })
+        this.setState({flippedCards: []})
       }, 1000)
 
     }
