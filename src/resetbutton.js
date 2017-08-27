@@ -13,7 +13,7 @@ class ResetButton extends React.Component {
   render() {
     return (
       <div className="button-box">
-        <button onClick={this.handleReset} className="reset-button"> Reset </button>
+        <button onClick={this.handleReset} className="button"> <span>Reset </span> </button>
       </div>
     )
   }

@@ -3,6 +3,7 @@ import Card from "./card"
 import shuffle from "./shuffle"
 import ResetButton from "./resetbutton"
 import GameOver from "./gameover"
+import Counter from "./counter"
 
 const photos = [
   "/images/dog-1.jpg",
@@ -20,7 +21,8 @@ class Game extends React.Component {
     this.state = {
       cards: this.duplicatedAndShuffledCards(),
       flippedCards: [],
-      gameIsOver: false
+      gameIsOver: false,
+      clicks: 0
     }
   }
 
@@ -30,6 +32,7 @@ class Game extends React.Component {
 
   handleCardFlip = (photo, id, unFlipCallBack) => {
     const flippedCards = [...this.state.flippedCards, { photo, unFlipCallBack, id }]
+    this.setState({clicks: this.state.clicks += 1})
     this.setState({ flippedCards }, this.handleFlippedCardChange)
   }
 
@@ -61,7 +64,7 @@ class Game extends React.Component {
   }
 
   resetGame = () => {
-    this.setState({cards: this.duplicatedAndShuffledCards(), flippedCards: [], gameIsOver: false})
+    this.setState({cards: this.duplicatedAndShuffledCards(), flippedCards: [], gameIsOver: false, clicks: 0})
   }
 
   renderCards = () => (
@@ -87,6 +90,7 @@ class Game extends React.Component {
         </div>
 
         <div className="side-panel">
+          <Counter clicks={this.state.clicks}/>
           <ResetButton onReset={this.resetGame}/>
         </div>
       </div>
