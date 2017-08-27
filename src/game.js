@@ -32,13 +32,16 @@ class Game extends React.Component {
 
   handleFlippedCardChange = () => {
     if(this.state.flippedCards.length === 2){
-      setTimeout(() => {
-        this.state.flippedCards.forEach(card => {
-          card.unFlipCallBack()
-        })
+      if(this.state.flippedCards[0].photo === this.state.flippedCards[1].photo){
         this.setState({flippedCards: []})
-      }, 1000)
-
+      }else{
+        setTimeout(() => {
+          this.state.flippedCards.forEach(card => {
+            card.unFlipCallBack()
+          })
+          this.setState({flippedCards: []})
+        }, 1000)
+      }
     }
   }
 
@@ -50,7 +53,8 @@ class Game extends React.Component {
           <Card
           canFlip={this.state.flippedCards.length < 2}
           onFlip={this.handleCardFlip}
-          image={card}/>
+          image={card.item}
+          key={card.idCounter}/>
         ))}
         </div>
 
