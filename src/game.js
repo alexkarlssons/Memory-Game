@@ -48,7 +48,7 @@ class Game extends React.Component {
         <div className="card-container">
         {this.state.cards.map(card => (
           <Card
-          canFlip={this.state.flippedCards && this.state.flippedCards.length < 2}
+          canFlip={this.state.flippedCards.length < 2}
           onFlip={this.handleCardFlip}
           image={card}/>
         ))}
