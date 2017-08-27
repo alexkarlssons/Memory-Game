@@ -5,7 +5,9 @@ import { inject, observer } from "mobx-react"
 class Card extends React.Component {
 
   flipCard = () => {
-    this.props.gameStore.flip(this.props.card)
+    if(!this.props.card.flipped){
+      this.props.gameStore.flip(this.props.card)
+    }
   }
 
   render() {
