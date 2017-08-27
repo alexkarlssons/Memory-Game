@@ -126,11 +126,18 @@ body {
 }
 
 .click-text {
+  background-color: #FF1493;
+  position: absolute;
   margin-left: 10px;
   margin-right: 10px;
-  margin-top: 30px;
+  top: 10px;
   padding: 5px;
   color: white;
   display: box;
   border: 3px solid #000;
+}
+
+.sidebar-img {
+  width: 230px;
+  height: 496px;
 }
