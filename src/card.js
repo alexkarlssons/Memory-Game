@@ -1,5 +1,7 @@
 import React from "react"
+import { inject } from "mobx-react"
 
+@inject("cardsStore")
 class Card extends React.Component {
 
   constructor(props) {

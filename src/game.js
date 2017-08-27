@@ -1,34 +1,24 @@
 import React from "react"
 import Card from "./card"
-import shuffle from "./shuffle"
 import ResetButton from "./resetbutton"
 import GameOver from "./gameover"
 import Counter from "./counter"
+import { inject } from "mobx-react"
 
-const photos = [
-  "/images/dog-1.jpg",
-  "/images/dog-2.jpg",
-  "/images/dog-3.jpg",
-  "/images/dog-4.jpg",
-  "/images/dog-5.jpg",
-  "/images/dog-6.jpg"
-]
-
+@inject("cardsStore")
 class Game extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      cards: this.duplicatedAndShuffledCards(),
+      cards: [],
       flippedCards: [],
       gameIsOver: false,
       clicks: 0
     }
   }
 
-  duplicatedAndShuffledCards = () => (
-    shuffle([...photos, ...photos])
-  )
+
 
   handleCardFlip = (photo, id, unFlipCallBack) => {
     const flippedCards = [...this.state.flippedCards, { photo, unFlipCallBack, id }]
@@ -49,11 +39,12 @@ class Game extends React.Component {
   }
 
   handleFlippedMatch = () => {
-    const cards = this.state.cards.filter(card => card.item !== this.state.flippedCards[0].photo)
+    const cards = this.props.cardsStore.cards.filter(card => card.item !== this.state.flippedCards[0].photo)
     if(cards.length === 0){
       this.setState({ gameIsOver: true })
     }
-    this.setState({ cards, flippedCards: [] })
+    this.props.cardsStore.setCards(cards)
+    this.setState({ flippedCards: [] })
   }
 
   handleFlippedMisMatch = () => {
@@ -64,11 +55,12 @@ class Game extends React.Component {
   }
 
   resetGame = () => {
-    this.setState({cards: this.duplicatedAndShuffledCards(), flippedCards: [], gameIsOver: false, clicks: 0})
+    this.props.cardsStore.resetCards()
+    this.setState({flippedCards: [], gameIsOver: false, clicks: 0})
   }
 
   renderCards = () => (
-    this.state.cards.map(card => (
+    this.props.cardsStore.cards.map(card => (
       <Card
       canFlip={this.state.flippedCards.length < 2}
       onFlip={this.handleCardFlip}
